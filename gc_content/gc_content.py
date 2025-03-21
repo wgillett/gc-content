@@ -1,4 +1,5 @@
 from io import TextIOWrapper
+from .exceptions import BadFastaFile
 
 
 def gc_content(file: TextIOWrapper) -> float:
@@ -25,7 +26,7 @@ def gc_content(file: TextIOWrapper) -> float:
         gc_count += sequence.count('G') + sequence.count('C')
     
     if total_bases == 0:
-        return 0.0
+        raise BadFastaFile("No sequences found in the file")
         
     print(f"GC count: {gc_count}, Total bases: {total_bases}")
     return gc_count / total_bases

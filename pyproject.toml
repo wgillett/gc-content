@@ -1,9 +1,16 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "gc-content"
 version = "0.1.0"
-description = "Add your description here"
+authors = [
+    { name = "Your Name" },
+]
+description = "A tool to calculate GC content in DNA sequences"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.7"
 dependencies = [
     "boto3>=1.37.17"
 ]
@@ -20,3 +27,7 @@ warn_unused_ignores = true
 warn_return_any = true
 warn_unreachable = true
 strict_optional = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

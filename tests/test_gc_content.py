@@ -1,10 +1,5 @@
-import sys
-import os
 from io import StringIO
-
-# Add the parent directory to the Python path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from gc_content import gc_content
+from gc_content.gc_content import gc_content
 
 def test_gc_content_correct_ratio():
     # Create a FASTA file with exactly:

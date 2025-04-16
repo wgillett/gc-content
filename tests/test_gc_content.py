@@ -1,6 +1,6 @@
 from io import StringIO
 from gc_content.gc_content import gc_content
-from gc_content.exceptions import BadFastaFile
+from gc_content.exceptions import BadFastaInput
 from pytest import raises
 
 def test_gc_content_correct_ratio():
@@ -18,5 +18,19 @@ def test_gc_content_no_sequences():
     fasta_content = ""
     fake_file = StringIO(fasta_content)
 
-    with raises(BadFastaFile):
+    with raises(BadFastaInput):
         gc_content(fake_file)
+
+def test_gc_content_of_file():
+    """Vary the test by starting with a file to open"""
+    with open("tests/data/test.fasta", "r") as fasta_file:
+        result = gc_content(fasta_file)
+        expected = 0.3  # 3 GC bases out of 10 total bases
+        assert abs(result - expected) < 1e-10
+
+def test_gc_content_of_string():
+    """Vary the test by starting with a string"""
+    fasta_str = ">test_sequence\nGCCAAAT\nTTT\n"
+    result = gc_content(fasta_str)
+    expected = 0.3  # 3 GC bases out of 10 total bases
+    assert abs(result - expected) < 1e-10

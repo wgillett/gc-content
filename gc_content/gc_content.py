@@ -30,7 +30,7 @@ def gc_content(fasta: Union[TextIOWrapper, Iterator[str], str]) -> float:
     elif isinstance(fasta, Iterable):
         return _gc_content(fasta)
     else:
-        raise BadFastaInput("Invalid input")
+        raise BadFastaInput(f"Unsupported FASTA input type: {type(fasta)}")
 
 def _gc_content(fasta: Iterator[str]) -> float:
     """

@@ -34,3 +34,8 @@ def test_gc_content_of_string():
     result = gc_content(fasta_str)
     expected = 0.3  # 3 GC bases out of 10 total bases
     assert abs(result - expected) < 1e-10
+
+def test_gc_content_of_int_fails():
+    with raises(BadFastaInput) as exc_info:
+        gc_content(17)
+    assert str(exc_info.value) == "Unsupported FASTA input type: <class 'int'>"
